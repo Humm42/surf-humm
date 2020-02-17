@@ -13,6 +13,11 @@ WEBEXTOBJ = $(WEBEXTSRC:.c=.o)
 
 all: options libsurf-webext.so surf
 
+patch:
+	for i in patches/*.diff; do \
+		patch -p1 <$$i; \
+	done
+
 options:
 	@echo surf build options:
 	@echo "CC            = $(CC)"
@@ -74,4 +79,4 @@ uninstall:
 	- rmdir $(DESTDIR)$(LIBDIR)
 
 .SUFFIXES: .so .o .c
-.PHONY: all options clean-dist clean dist install uninstall
+.PHONY: all options clean-dist clean dist install uninstall patch
